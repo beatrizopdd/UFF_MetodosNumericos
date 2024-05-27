@@ -1,25 +1,36 @@
+def pivoteamento(A, b, k):
+  maiorElem = A[k][k]
+  maiorIndc = k
+  for i in range(0, len(A)):
+    if (A[i][k] > maiorElem):
+      maiorIndc = i
+
+  tempA = A[k]
+  A[k] = A[maiorIndc]
+  A[maiorIndc] = tempA
+
+  tempB = b[k]
+  b[k] = b[maiorIndc]
+  b[maiorIndc] = tempB
+
+  return A, b
+
 def triangularizacao_superior(A, b):
-  n =
+  n = len(b)
 
-Entrada: A, b
-Sa ́ıda: U, c
-1: n ← tamanho(b) ▷ n poderia ser parˆametro de entrada
-2: U ← A ▷ Copia (A, b) para (U, c)
-3: c ← b
-4: para k ∈ {1, 2, . . . , n 9 1} fa ̧ca
-5: para i ∈ {k + 1, k + 2, . . . , n} fa ̧ca
-6: sik ← uik/ukk ▷ uij s ̃ao os coeficientes de U
-7: ci ← ci 9 sikck ▷ ci s ̃ao os coeficientes de c
-8: para j ∈ {k, k + 1, . . . , n} fa ̧ca
-9: uij ← uij 9 sikukj ▷ Os termos a
-⋆
-ij s ̃ao sobrescritos em U
+  for k in range(0, n):
+    
+    for i in range(k+1, n):
+      U, c = pivoteamento(A, b, k)
+      s = U[i][k] / U[k][k]
+      
+      for j in range(k, n):
+        U[i][j] = U[i][j] - s * U[k][j]
 
-10: fim para ▷ assim como b
-⋆
-i
-s ̃ao sobrescritos em c (linha 7)
+      c[i] = c[i] - s * c[k]
 
-11: fim para
-12: fim para
-13: retorne U, c
+  return U, c
+
+U, c = triangularizacao_superior([[0, 2, 5], [2, 1, 1], [3, 1, 0]], [1, 1, 2])
+print(U)
+print(c)
