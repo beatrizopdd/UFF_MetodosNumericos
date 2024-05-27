@@ -1,15 +1,3 @@
-def copia(A, b):
-  n = len(A)
-  U = []
-  for i in range(0, n):
-    linha = []
-    linha.copy
-    for j in range(0, n):
-      linha.append(A[i][j])
-    B.append(linha)
-
-  return B
-
 def pivoteamento(A, b, k):
   maiorElem = A[k][k]
   maiorIndc = k
@@ -30,13 +18,10 @@ def pivoteamento(A, b, k):
 def triangularizacao_superior(A, b):
   n = len(b)
 
-  U = A
-  c = b.copy
-
   for k in range(0, n):
     
     for i in range(k+1, n):
-      U, c = pivoteamento(U, c, k)
+      U, c = pivoteamento(A, b, k)
       s = U[i][k] / U[k][k]
       
       for j in range(k, n):
@@ -46,6 +31,10 @@ def triangularizacao_superior(A, b):
 
   return U, c
 
-U, c = triangularizacao_superior([[0, 2, 5], [2, 1, 1], [3, 1, 0]], [1, 1, 2])
+A = [[0, 2, 5], [2, 1, 1], [3, 1, 0]]
+b = [1, 1, 2]
+U, c = triangularizacao_superior(A, b)
+print(A)
+print(b)
 print(U)
 print(c)
